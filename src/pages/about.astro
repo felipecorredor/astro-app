@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getLatestLaunches } from '../services/spacex';
+import SearchLaunches from '../components/preact/SearchLaunches.tsx'
+import Counter from '../components/vue/Counter.vue';
+
+const launches = await getLatestLaunches();
+
+const namesLaunches = launches.map((launch) => launch.name)
+---
+
+<Layout title='about'>
+  <h1>About the project</h1>
+  
+  <p>The SpaceX launches project is a demo for the Astro course</p>
+
+  <SearchLaunches client:load launches={namesLaunches} />
+  <Counter client:visible />
+  
+</Layout>
